@@ -1,0 +1,24 @@
+
+LOW PRIORITY
+----------------------------
+Things to take care in next version:
+-> in odoo_install we are assuming that postgresql is 9.1. we should either specify in the installation commmand to install 9.1 or do not hardcode 9.1 to specify directory in the remaining script(actually this port opening is required only if external applications are accessing..else we can avoid this line)
+-> in odoo_install, add the code to ignore '*.~" files in gitignore file
+--> in the beginning of the odoo_install , ask user if he has placed tar file in the same directory..else quit program
+--> as per the currenct odoo_install scripts, vanilla installation can be run by only root user. it's log directory is /var/log/odoo and for remaining projects log directory will be /var/log/nvcrunner. other projects in vps will also be run by same root user itself. the db role for vanilla will be 'odoo' but the db role for other projects in vps will be 'nvcruner'. put all this SOP doc
+--> while running configure_instance_gen.sh, update the script in such a way that there should be no port conflicting with existing instances in that vps
+--> in configure_database_gen.sh, do some testing in the beginning of the file so that if someone accidentally re-run this script, it should not run again for the same project
+
+--> for daily backups, currently its one script for one project...see if thats better or one file for all projects in a vps...
+
+
+HIGH PRIORITY
+----------------------------
+--> Try restoring the db backups taken, both as deployment and daily bkps. Currently we are doing it in dump format in openerp way....try taking bkp and restore in postgresql way which seems more faster
+
+-> in start_project.sh, first do a checking if a project directory with same project code is existing. if yes, give proper message to user and exit the program
+
+-> in configure_instance_gen.sh, first do a checking if a project init file with same project code is existing. if yes, give proper message to user and exit the program
+
+
+
