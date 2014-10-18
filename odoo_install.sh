@@ -44,6 +44,14 @@ exit 0
 else
 echo "online"
 fi
+echo -e "\n---- Configuring Locales ----"
+
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+locale-gen en_US.UTF-8
+dpkg-reconfigure locales
+
 echo -e "\n---- Update Server ----"
 sudo apt-get update
 
