@@ -1,7 +1,9 @@
 #!/bin/bash
 ################################################################################
-# Script for Installation: ODOO Saas4/Trunk server on Ubuntu 14.04 LTS
+# Script for Installation: ODOO Saas4/Trunk server on Ubuntu 12.04 LTS
 # Author:Jamshid k
+# jamshu.mkd@gmail.com
+# mob: +91 9744894 950
 #-------------------------------------------------------------------------------
 #  
 # This script will install ODOO Server on
@@ -16,8 +18,6 @@
 #
 ################################################################################
  
-##fixed parameters
-#openerp
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-8.0"

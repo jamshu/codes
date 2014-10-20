@@ -31,13 +31,13 @@ sudo git add .
 sudo git commit -m "COMMIT AFTER SWITCHING TO THE BRANCH TEST"
 sudo git remote add nvcgitserver $GIT_USER@$GIT_HOSTNAME:$GIT_SERVER_HOME/$PROJECT_CODE/custom_addons.git
 #------------------------original setup --------------------------------------------------------------------------------#
-#ssh -t $GIT_USER@$GIT_HOSTNAME "cd $GIT_SERVER_HOME/$PROJECT_CODE;sudo tar -zcvf $ODOO_BASE.tar.gz $ODOO_BASE ;exit" 
-#sudo scp $GIT_USER@$GIT_HOSTNAME:$GIT_SERVER_HOME/$PROJECT_CODE/$ODOO_BASE.tar.gz $HOME/TEST/odoo_home
+ssh -t $GIT_USER@$GIT_HOSTNAME "cd $GIT_SERVER_HOME/$PROJECT_CODE;sudo tar -zcvf $ODOO_BASE.tar.gz $ODOO_BASE ;exit" 
+sudo scp $GIT_USER@$GIT_HOSTNAME:$GIT_SERVER_HOME/$PROJECT_CODE/$ODOO_BASE.tar.gz $HOME/TEST/odoo_home
 #----------------------------------end-----------------------------------------------------------------------------------#
 
 #-------------------------Temporary for testiing purpose comment these in original vps and uncomment above original setup---#
-cd /home/novizco/scripts
-sudo cp latest/$ODOO_BASE.tar.gz $HOME/TEST/odoo_home
+#cd /home/novizco/scripts
+#sudo cp latest/$ODOO_BASE.tar.gz $HOME/TEST/odoo_home
 #-------------------------End------------------------------------------------------------------------------------------------#
 cd $HOME/TEST/odoo_home
 sudo cp $ODOO_BASE.tar.gz $HOME/PROD/odoo_home
