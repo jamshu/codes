@@ -46,14 +46,14 @@ echo "online"
 fi
 echo -e "\n---- Configuring Locales ----"
 
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-locale-gen en_US.UTF-8
-dpkg-reconfigure locales
+#export LANGUAGE=en_US.UTF-8
+#export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
+#locale-gen en_US.UTF-8
+#dpkg-reconfigure locales
 
 echo -e "\n---- Update Server ----"
-sudo apt-get update
+#sudo apt-get update
 
 sudo apt-get install openssh-server
 
@@ -61,11 +61,11 @@ sudo apt-get install openssh-server
 echo -e "\n---- Create ODOO system user ----"
 sudo adduser --system --home=/opt/odoo --group odoo
 
-echo -e "\n---- Creating vps user $VPS_USER enter password as $VPS_USER_PWD  ----"
-sudo adduser --home=/opt/projects $VPS_USER
-
+echo -e "\n---- Creating vps user $VPS_USER  ----"
 #sudo adduser --home=/opt/projects $VPS_USER
-sudo usermod -aG sudo $VPS_USER
+
+sudo adduser --system --home=/opt/projects --group $VPS_USER
+#sudo usermod -aG sudo $VPS_USER
 #--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
@@ -141,17 +141,18 @@ sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
-sudo chown -R $VPS_USER:$VPS_USER $VPS_HOME/*
+#sudo chown -R $VPS_USER:$VPS_USER $VPS_HOME/*
 
 echo -e "* Create server config file"
 sudo cp $OE_HOME_EXT/debian/openerp-server.conf /etc/$OE_CONFIG.conf
 sudo chown $OE_USER:$OE_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
 
+PATH=$OE_HOME_EXT/addons,$OE_HOME/custom/addons
 echo -e "* Change server config file"
-
 sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/$OE_CONFIG.conf
-sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
+sudo sed -i "s|addons_path = .*|addons_path = $PATH|g" /etc/odoo-server.conf
+#sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
 sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/$OE_CONFIG.conf"
 #sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/$OE_CONFIG.conf"
 

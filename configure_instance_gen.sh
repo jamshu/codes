@@ -41,6 +41,8 @@ fi
 
 #sudo cp $CODE_REPO/$PROJECT_CODE/$TYPE/odoo_home/$ODOO_VERSION/debian/openerp-server.conf /etc/$OE_CONFIG.conf
 sudo cp /opt/odoo/odoo-8.0/debian/openerp-server.conf /etc/$OE_CONFIG.conf
+sudo chown $VPS_USER:$VPS_USER /etc/$OE_CONFIG.conf
+sudo chmod 640 /etc/$OE_CONFIG.conf
 echo -e "* Change server config file"
 #editing configuration
 sudo sed -i s/"db_user = .*"/"db_user = $DB_USER"/g /etc/$OE_CONFIG.conf
@@ -49,7 +51,8 @@ sudo sed -i s/"db_password = .*"/"db_password = $DB_PASS"/g /etc/$OE_CONFIG.conf
 #sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $ADMIN_PASS"/g /etc/$OE_CONFIG.conf
 #sudo sed -i s/"logfile = .*"/"logfile = /var/log/$PROJECT_CODE/$OE_CONFIG$1.log"/g /etc/$OE_CONFIG.conf
 sudo su root -c "echo 'logfile = /var/log/$VPS_USER/$OE_CONFIG$1.log' >> /etc/$OE_CONFIG.conf"
-sudo su root -c "echo 'addons_path = $ADDONS_PATH' >> /etc/$OE_CONFIG.conf"
+#sudo su root -c "echo 'addons_path = $ADDONS_PATH' >> /etc/$OE_CONFIG.conf"
+sudo sed -i "s|addons_path = .*|addons_path = $ADDONS_PATH|g" /etc/odoo-server.conf
 sudo su root -c "echo 'xmlrpc_port = $XMLRPC_PORT' >> /etc/$OE_CONFIG.conf"
 #creating instance
 echo -e "* Create init file"
