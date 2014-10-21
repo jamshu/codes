@@ -39,8 +39,8 @@ else
 fi
 		
 
-#sudo cp $CODE_REPO/$PROJECT_CODE/$TYPE/odoo_home/$ODOO_VERSION/debian/openerp-server.conf /etc/$OE_CONFIG.conf
-sudo cp /opt/odoo/odoo-8.0/debian/openerp-server.conf /etc/$OE_CONFIG.conf
+sudo cp $CODE_REPO/$PROJECT_CODE/$TYPE/odoo_home/$ODOO_VERSION/debian/openerp-server.conf /etc/$OE_CONFIG.conf
+#sudo cp /opt/odoo/odoo-8.0/debian/openerp-server.conf /etc/$OE_CONFIG.conf
 sudo chown $VPS_USER:$VPS_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
 echo -e "* Change server config file"
