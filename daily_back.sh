@@ -21,10 +21,11 @@ for i in $PROD_DB; do
     #pg_dump $i|gzip > $backupfile
 	
 
-    backupfile=$PROD_BKP_DR$i.$backup_date.dump
+    backupfile=$PROD_BKP_DR$i-$backup_date.dump
     echo Dumping $i to $backupfile
     #pg_dump $i|gzip > $backupfile
-    sudo su $VPS_USER -c "pg_dump --cluster 9.1/main --format=c $i" > $backupfile
+    #sudo su $VPS_USER -c "pg_dump --cluster 9.1/main --format=c $i" > $backupfile
+    sudo su $VPS_USER -c "pg_dump -Fc $i" > $backupfile
   
 done
 
@@ -37,8 +38,8 @@ for i in $TEST_DB; do
     backupfile=$TEST_BKP_DR$i.$backup_date.dump
     echo Dumping $i to $backupfile
     #pg_dump $i|gzip > $backupfile
-    sudo su $VPS_USER -c "pg_dump --cluster 9.1/main --format=c $i" > $backupfile
-  
+    #sudo su $VPS_USER -c "pg_dump --cluster 9.1/main --format=c $i" > $backupfile
+  	sudo su $VPS_USER -c "pg_dump -Fc $i" > $backupfile
 done
 
 for inst in $INSTANCES; do

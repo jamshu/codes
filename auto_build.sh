@@ -85,11 +85,12 @@ backup_date=`date +%Y-%m-%d_%H-%M`
 for i in $DATABASE; do
   
     #backupfile=$DB_BKP$i.$backup_date.sql.gz
-    backupfile=$DB_BKP$i.$backup_date.dump
+    backupfile=$DB_BKP$i-$backup_date.dump
     echo Dumping $i to $backupfile
     echo "Enter password as $VPS_ROLE_PWD"
     #pg_dump $i|gzip > $backupfile
-    sudo su $VPS_USER -c "pg_dump --cluster 9.1/main --format=c $i" > $backupfile
+   # sudo su $VPS_USER -c "pg_dump --cluster 9.1/main --format=c $i" > $backupfile
+    sudo su $VPS_USER -c "pg_dump -Fc $i" > $backupfile
     cp $backupfile $DB_BKP_DR/good.dump
 done
 
@@ -122,8 +123,8 @@ sudo git push nvcgitserver $GIT_BRANCH
 auto_build()
 {
 code_backup;
-db_backup;
 fetch;
+db_backup;
 exit 0;
 }
 auto_build;
