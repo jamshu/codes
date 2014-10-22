@@ -7,10 +7,10 @@ git clone deployer@192.30.164.173:/opt/gitplace/projects/$PROJECT_CODE/custom_ad
 cd custom_addons
 git remote add nvcgitserver deployer@192.30.164.173:/opt/gitplace/projects/$PROJECT_CODE/custom_addons.git
 git fetch nvcgitserver
+#For base
 #cd $PROJECT_HOME
 #git clone deployer@192.30.164.173:/opt/gitplace/projects/$PROJECT_CODE/odoo-8.0
 #cd odoo-8.0
 #git remote add nvcgitserver deployer@192.30.164.173:/opt/gitplace/projects/$PROJECT_CODE/odoo-8.0
 #git fetch nvcgitserver 
-#git remote add nvcgitserver deployer@192.30.164.173:/opt/gitplace/projects/project2/custom_addons.git
-#git remote add nvcgitserver deployer@192.30.164.173:/opt/gitplace/projects/project2/odoo-8.0
+
