@@ -116,7 +116,9 @@ echo $ODOO_HOME
 sudo git checkout $GIT_BRANCH 
 #sudo git add .
 #sudo git commit -m "LAST COMMIT BEFORE PULL ON $CUR_TIME "
-sudo git pull nvcgitserver $MERGE_BRANCH 
+#sudo git pull nvcgitserver $MERGE_BRANCH 
+sudo git fetch nvcgitserver
+sudo git merge nvcgitserver/$MERGE_BRANCH
 sudo git push nvcgitserver $GIT_BRANCH 
 
 }
